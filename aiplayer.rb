@@ -2,8 +2,8 @@ require_relative 'player.rb'
 
 class AiPlayer < Player
 
-  def initialize
-    super("Computer", :light_red, [StringIO.open(" \n"), StringIO.open(" \n")])
+  def initialize(name = "Computer")
+    super(name, :light_red, [StringIO.open(" \n"), StringIO.open(" \n")])
     @line_counter = 0
   end
 

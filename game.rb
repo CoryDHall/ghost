@@ -29,6 +29,8 @@ class Game
     "#{object_id} #{scoreboard}"
   end
 
+  attr_reader :players
+
   private
 
   def clear_fragment

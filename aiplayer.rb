@@ -20,12 +20,6 @@ class AiPlayer < Player
     $stdin.string.split("\n").last
   end
 
-  def set_streams
-    # @streams[1].print $stdin.gets
-    # @streams[1].print $stdout.gets
-    super
-  end
-
   private
 
     attr_accessor :line_counter

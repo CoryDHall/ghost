@@ -3,6 +3,7 @@ require_relative 'aiplayer.rb'
 class MemorizingAiPlayer < AiPlayer
 
   def self.parse(file_name)
+    ensure_directory
     File.open(file_name, 'a')
     lines = {}
     File.readlines(file_name).map(&:chomp).each do |line|
@@ -12,9 +13,15 @@ class MemorizingAiPlayer < AiPlayer
   end
 
   def self.dump_to(dictionary_arr, file_name)
+    ensure_directory
     File.open(file_name, 'w') do |file|
       file.write(dictionary_arr.join("\n") + "\n")
     end
+  end
+
+  def self.ensure_directory
+    directory = File.dirname(file_name)
+    Dir.mkdir(directory) unless (File.directory?(directory))
   end
 
   def initialize(name = "Computer")

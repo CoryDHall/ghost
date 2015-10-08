@@ -10,7 +10,7 @@ class BayesianAiPlayer < MemorizingAiPlayer
   def dict_string_arr
     output = []
     @_dictionary.each do |letter, data|
-      output << "#{letter}\t#{data.values.join("\t")}"
+      output << "#{letter}\t#{data.values.map(&:to_i).join("\t")}"
     end
     output
   end
@@ -28,8 +28,8 @@ class BayesianAiPlayer < MemorizingAiPlayer
     dict[letter] ||= Hash.new do |h, k|
       h[k] = 0
     end
-    dict[letter][:valids] = valids.to_i
-    dict[letter][:losses] = losses.to_i
+    dict[letter][:valids] = valids.to_f
+    dict[letter][:losses] = losses.to_f
   end
 
   DIR = "bayesian"
@@ -37,6 +37,7 @@ class BayesianAiPlayer < MemorizingAiPlayer
   def lose_round
     super
     @_dictionary[@last_guess][:losses] += 1
+    @total_losses += 1
     save_memory
   end
 
@@ -55,8 +56,8 @@ class BayesianAiPlayer < MemorizingAiPlayer
     end
 
     def set_total
-      @total_valids = 0
-      @total_losses = 0
+      @total_valids = 0.0
+      @total_losses = 0.0
       @_dictionary.values.each do |data|
         @total_valids += data[:valids]
         @total_losses += data[:losses]
@@ -75,15 +76,17 @@ class BayesianAiPlayer < MemorizingAiPlayer
     end
 
     def chance_valid(letter)
-      @total_valids == 0 ? 1 : @_dictionary[letter][:valids] / @total_valids
+      v = @_dictionary[letter][:valids]
+      v == 0 ? 1.0 : v / @total_valids
     end
 
     def chance_loss(letter)
-      @total_losses == 0 ? 0 : @_dictionary[letter][:losses] / @total_losses
+      v = @_dictionary[letter][:valids]
+      v == 0 ? 0.0 : @_dictionary[letter][:losses] / v
     end
 
     def losses_to_valids
-      @total_valids == 0 ? 1 : @total_losses / @total_valids
+      @total_losses == 0 ? 1.0 : @total_losses / @total_valids
     end
 
     def choose_letter
@@ -102,7 +105,7 @@ class BayesianAiPlayer < MemorizingAiPlayer
       highest_success_rate = 0
       choice = nil
       @_dictionary.each_key do |letter|
-        success_rate = (1 - losses_to_valids) * (1 - chance_loss(letter)) * chance_valid(letter)
+        success_rate = (1 - chance_loss(letter)) / (losses_to_valids / chance_valid(letter))
         if success_rate > highest_success_rate && @invalids[letter].nil?
           highest_success_rate = success_rate
           choice = letter

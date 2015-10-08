@@ -81,6 +81,9 @@ class Game
       fragment_error(letter)
       letter = get_letter
     end until valid_play?(letter)
+    HUMAN.set_streams
+    print ".#{letter}".colorize(current_player.color)
+    switch_io
     letter
   end
 
@@ -122,7 +125,7 @@ class Game
 
   def fragment_error(letter)
     HUMAN.set_streams
-    print "."
+    print ".#{letter}".colorize(current_player.color)
     current_player.set_streams
     puts "\"#{@fragment + letter}\" does not begin a word"  unless letter.nil?
   end

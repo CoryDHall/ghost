@@ -3,7 +3,7 @@ require 'colorize'
 class Player
 
 
-  attr_accessor :in_stream, :out_stream, :letter_count, :name
+  attr_accessor :in_stream, :out_stream, :letter_count, :name, :color
 
   def initialize(name, color = :blue, streams = [out_stream=STDIN, in_stream=STDOUT])
     @name = name

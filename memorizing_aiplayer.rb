@@ -3,40 +3,54 @@ require_relative 'aiplayer.rb'
 class MemorizingAiPlayer < AiPlayer
 
   def self.parse(file_name)
-    ensure_directory
-    File.open(file_name, 'a')
-    lines = {}
+    ensure_directory(file_name)
+    File.open(file_name, 'a') { |file| file }
+    make_dictionary(file_name)
+  end
+
+  def self.make_dictionary(file_name)
+    dict = {}
     File.readlines(file_name).map(&:chomp).each do |line|
-      lines[line] = true
+      parse_line(dict, line)
     end
-    lines
+    dict
+  end
+
+  def self.parse_line(dict, line)
+      dict[line] = true
   end
 
   def self.dump_to(dictionary_arr, file_name)
-    ensure_directory
+    ensure_directory(file_name)
     File.open(file_name, 'w') do |file|
       file.write(dictionary_arr.join("\n") + "\n")
     end
   end
 
-  def self.ensure_directory
+  def self.ensure_directory(file_name)
     directory = File.dirname(file_name)
     Dir.mkdir(directory) unless (File.directory?(directory))
   end
 
   def initialize(name = "Computer")
     super(name)
-    @color = :light_blue
-    @memory_file = "memorizing/current.dict.txt"
-    @_dictionary = MemorizingAiPlayer.parse(@memory_file)
+    set_vars
   end
 
   def dump_memory(file_name = "#{@name}#{Time.now}")
     file_name = file_name.downcase.scan(/\w+/).join("")
-    MemorizingAiPlayer.dump_to @_dictionary.sort, "memorizing/#{file_name}.dict.txt"
+    MemorizingAiPlayer.dump_to @_dictionary.sort, "#{DIR}/#{file_name}.dict.txt"
   end
 
+  DIR = "memorizing"
+
   private
+
+    def set_vars
+      @color = :light_blue
+      @memory_file = "#{DIR}/current.dict.txt"
+      @_dictionary = MemorizingAiPlayer.parse(@memory_file)
+    end
 
     def think
       memorize @current_frag

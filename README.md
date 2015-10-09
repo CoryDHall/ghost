@@ -40,6 +40,6 @@ This AI keeps a record of it's outputs that have resulted in valid word fragment
 
 ***
 ##  Todo
-[ ]  Extend existing AI classes to make smarter AIs
-[ ]  Refactor the Player Interface into an agnostic agent
-[ ]  Split this project into smaller focused projects
+- [ ]  Extend existing AI classes to make smarter AIs
+- [ ]  Refactor the Player Interface into an agnostic agent
+- [ ]  Split this project into smaller focused projects

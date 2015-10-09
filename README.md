@@ -45,7 +45,7 @@ This AI extends the previous, but maintains a dictionary file of fragments that 
 This AI keeps a record of it's outputs that have resulted in valid word fragments, and the number of times that playing a letter resulted in a loss. It then takes those values and calculates a response that is optimized for speed and winning.
 * This algorithm will develop a disposition to a certain response
 * Due to this, over time, this game outperforms the preceding AI's in both speed and accuracy
-* the downside is the AI develops predictable behavior that is harder for a brute force AI to defeat, but easier for a human player to defeat.
+* the downside is the AI develops predictable behavior that is harder for a brute force AI (in this case, `AiPlayer` to defeat, but easier for a human player to defeat.
 
 [Read More][bayesian]
 [bayesian]: https://en.m.wikipedia.org/wiki/Bayesian_inference

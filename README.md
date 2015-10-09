@@ -37,8 +37,9 @@ This AI keeps a record of it's outputs that have resulted in valid word fragment
 * This algorithm will develop a disposition to a certain response
 * Due to this, over time, this game outperforms the preceding AI's in both speed and accuracy
 * the downside is the AI develops predictable behavior that is harder for a brute force AI to defeat, but easier for a human player to defeat.
+
 ***
 ##  Todo
-[]  Extend existing AI classes to make smarter AIs
-[]  Refactor the Player Interface into an agnostic agent
-[]  Split this project into smaller focused projects
+[ ]  Extend existing AI classes to make smarter AIs
+[ ]  Refactor the Player Interface into an agnostic agent
+[ ]  Split this project into smaller focused projects

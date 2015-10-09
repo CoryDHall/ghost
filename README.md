@@ -26,6 +26,8 @@
 ---
 
 * So far, I have implemented 3 different AI classes:
+
+
 ####  `AiPlayer` | Brute Force AI
 This AI executes a dumb brute force algorithm to eventually find a valid play with no regard to result.
 * This algorithm has no concern for presenting unique responses, therefore could have a worse case time complexity of O(∞)

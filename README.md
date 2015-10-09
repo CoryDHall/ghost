@@ -38,7 +38,7 @@ This AI executes a dumb brute force algorithm to eventually find a valid play wi
 ####  `MemorizingAiPlayer` | Smarter Brute Force AI
 This AI extends the previous, but maintains a dictionary file of fragments that it knows are valid with no regard to the result
 * This algorithm is only faster than it's predecessor if it is encountering a fragment it has seen before.
-* This algorithm is faster than `AiPlayer`, but just as likely to lose.
+* As it ages through it's life cycle, this algorithm grows faster than `AiPlayer`, but just as likely to lose.
 
 [Read More][faster brute force]
 [faster brute force]: https://en.m.wikipedia.org/wiki/Brute-force_search#Speeding_up_brute-force_searches
@@ -47,13 +47,14 @@ This AI extends the previous, but maintains a dictionary file of fragments that 
 This AI keeps a record of it's outputs that have resulted in valid word fragments, and the number of times that playing a letter resulted in a loss. It then takes those values and calculates a response that is optimized for speed and winning.
 * This algorithm will develop a disposition to a certain response
 * Due to this, over time, this game outperforms the preceding AI's in both speed and accuracy
-* the downside is the AI develops predictable behavior that is harder for a brute force AI (in this case, `AiPlayer` to defeat, but easier for a human player to defeat.
+* the downside is the AI develops predictable behavior that is harder for a brute force AI (in this case, `AiPlayer`) to defeat, but easier for a human player to defeat.
 
 [Read More][bayesian]
 [bayesian]: https://en.m.wikipedia.org/wiki/Bayesian_inference
 
 ***
 ##  Todo
+- [ ]  Modify or extend the `BayesianAiPlayer` to prioritize win cases over valid cases
 - [ ]  Extend existing AI classes to make smarter AIs
 - [ ]  Refactor the Player Interface into an agnostic agent
 - [ ]  Split this project into smaller focused projects

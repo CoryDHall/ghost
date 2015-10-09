@@ -7,18 +7,18 @@
 ---
 + Bayesian Inference AI
 ---
-
+***
 + GHOST
 ---
 
 * A simple word game where players are tasked with choosing a letter such that it forms a valid word fragment from a given dictionary, but also avoids forming a full word [lose case]. Everytime a player loses a round, they accrue a letter, and are knocked out of the game if they reach the code word «not dissimilar to the game HORSE»
-
+***
 + Player Interface
 ---
 
 * A class that handles player interaction with the game.
 * Uses modification of `$stdin` and `$stdout` to allow expansion of the class to accomodate user input from outside the command line
-
+***
 + AI:
 ---
 
@@ -37,7 +37,7 @@ This AI keeps a record of it's outputs that have resulted in valid word fragment
 * This algorithm will develop a disposition to a certain response
 * Due to this, over time, this game outperforms the preceding AI's in both speed and accuracy
 * the downside is the AI develops predictable behavior that is harder for an AI to defeat, but easier for a human player to defeat.
-
+***
 ##  Todo
 []  Extend existing AI classes to make smarter AIs
 []  Refactor the Player Interface into an agnostic agent

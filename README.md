@@ -12,6 +12,8 @@
 ---
 
 * A simple word game where players are tasked with choosing a letter such that it forms a valid word fragment from a given dictionary, but also avoids forming a full word [lose case]. Everytime a player loses a round, they accrue a letter, and are knocked out of the game if they reach the code word «not dissimilar to the game HORSE»
+[Read More][ghost]
+[ghost]: https://en.m.wikipedia.org/wiki/Ghost_(game)
 ***
 + Player Interface
 ---

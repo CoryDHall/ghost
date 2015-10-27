@@ -19,6 +19,7 @@ class Game
     until winner?
       clear_fragment
       play_round
+      update_user_data
       loser = remove_loser
       puts "#{loser} is out of the game." if loser
     end
@@ -32,6 +33,16 @@ class Game
   attr_reader :players
 
   private
+
+  def update_user_data
+    @players.each do |player|
+      begin
+        player.commit_memory
+      rescue => e
+        puts "Unable to save #{player.name}", e.inspect
+      end
+    end
+  end
 
   def clear_fragment
     @fragment = ""

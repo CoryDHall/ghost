@@ -98,14 +98,20 @@ class Node
     self
   end
 
+  def to_yaml
+    to_tree.to_yaml
+  end
+
   def self.from_tree(value, tree)
     node = Node.new(value)
     node.build_family tree
   end
 
-  def self.from_yaml(value, yaml_string)
+  def self.from_yaml(yaml_string)
     tree = YAML::load yaml_string
-    from_tree value, tree
+    tree = tree || { "" => {} }
+    value = tree.keys.first
+    from_tree value, tree[value]
   end
 
   protected

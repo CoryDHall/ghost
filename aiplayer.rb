@@ -1,5 +1,9 @@
 require_relative 'player.rb'
 
+class Ai
+
+end
+
 class AiPlayer < Player
 
   def initialize(name = "Computer")

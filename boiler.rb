@@ -7,6 +7,8 @@ def create_players
   @human_player = Player.new "You"
   @prometheus = AiPlayer.new "Prometheus"
   @moneta = MemorizingAiPlayer.new "Moneta"
+  @chronus = Ai::BetterMemorizer.new "Chronus"
+  @chronus.color = :light_white
   @athena = BayesianAiPlayer.new "Athena"
   @minerva = BayesianAiPlayer.new "Minerva"
   @minerva.color = :white

@@ -1,5 +1,5 @@
 require_relative 'player'
-require 'byebug'
+# require 'byebug'
 
 class Game
   LOSING_WORD = 'GHOST'

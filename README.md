@@ -25,17 +25,17 @@
 + AI:
 ---
 
-* So far, I have implemented 3 different AI classes:
+* So far, I have implemented 3 different `AI` classes:
 
 
-####  `AiPlayer` | Brute Force AI
+####  `Ai::BruteForce` | Brute Force AI
 This AI executes a dumb brute force algorithm to eventually find a valid play with no regard to result.
 * This algorithm has no concern for presenting unique responses, therefore could have a worse case time complexity of O(∞)
 
 [Read More][brute force]
 [brute force]: https://en.m.wikipedia.org/wiki/Brute-force_search
 
-####  `MemorizingAiPlayer` | Smarter Brute Force AI
+####  `Ai::Memorizer` | Smarter Brute Force AI
 This AI extends the previous, but maintains a dictionary file of fragments that it knows are valid with no regard to the result
 * This algorithm is only faster than it's predecessor if it is encountering a fragment it has seen before.
 * As it ages through it's life cycle, this algorithm grows faster than `AiPlayer`, but just as likely to lose.

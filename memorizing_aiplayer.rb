@@ -1,6 +1,6 @@
 require_relative 'aiplayer.rb'
 
-class MemorizingAiPlayer < AiPlayer
+class Ai::Memorizer < Ai::BruteForce
 
   def self.parse(file_name)
     ensure_directory(file_name)
@@ -39,7 +39,7 @@ class MemorizingAiPlayer < AiPlayer
 
   def dump_memory(file_name = "#{@name}#{Time.now}")
     file_name = file_name.downcase.scan(/\w+/).join("")
-    MemorizingAiPlayer.dump_to @_dictionary.sort, "#{DIR}/#{file_name}.dict.txt"
+    Ai::Memorizer.dump_to @_dictionary.sort, "#{DIR}/#{file_name}.dict.txt"
   end
 
   DIR = "memorizing"
@@ -49,7 +49,7 @@ class MemorizingAiPlayer < AiPlayer
     def set_vars
       @color = :light_blue
       @memory_file = "#{DIR}/current.dict.txt"
-      @_dictionary = MemorizingAiPlayer.parse(@memory_file)
+      @_dictionary = Ai::Memorizer.parse(@memory_file)
     end
 
     def think

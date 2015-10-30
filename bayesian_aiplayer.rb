@@ -1,6 +1,6 @@
 require_relative 'memorizing_aiplayer.rb'
 
-class BayesianAiPlayer < MemorizingAiPlayer
+class BayesianAiPlayer < Ai::Memorizer
 
   def dump_memory(file_name = "#{@name}#{Time.now}")
     file_name = file_name.downcase.scan(/\w+/).join("")

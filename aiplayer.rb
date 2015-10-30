@@ -1,10 +1,6 @@
 require_relative 'player.rb'
 
-class Ai
-
-end
-
-class AiPlayer < Player
+class Ai::BruteForce < Player
 
   def initialize(name = "Computer")
     super(name, :light_red, [StringIO.open(" \n"), StringIO.open(" \n")])

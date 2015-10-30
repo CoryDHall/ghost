@@ -1,7 +1,7 @@
-require_relative 'memorizing_aiplayer_2.rb'
+require_relative 'memorizing_aiplayer.rb'
 require_relative 'node.rb'
 
-class Ai::BetterMemorizer < MemorizingAiPlayer
+class Ai::BetterMemorizer < Ai::Memorizer
 
   def self.make_dictionary(file_name)
     Node.from_yaml File.read(file_name)
@@ -21,7 +21,10 @@ class Ai::BetterMemorizer < MemorizingAiPlayer
 
   def dump_memory(file_name = "#{@name}#{Time.now}")
     file_name = file_name.downcase.scan(/\w+/).join("")
-    Ai::BetterMemorizer.dump_to @_dictionary, "#{DIR}/#{file_name}.dict.yml"
+
+    new_memory = Ai::BetterMemorizer.dictionary_to_node @_dictionary
+
+    Ai::BetterMemorizer.dump_to new_memory, "#{DIR}/#{file_name}.dict.yml"
   end
 
   def commit_memory
@@ -35,8 +38,8 @@ class Ai::BetterMemorizer < MemorizingAiPlayer
     def set_vars
       @color = :light_blue
       @memory_file = "#{DIR}/current.dict.yml"
-      @_dictionary = Ai::BetterMemorizer.parse(@memory_file)
-      @_current_node = @_dictionary
+      @memory = Ai::BetterMemorizer.parse(@memory_file)
+      @_dictionary = Ai::BetterMemorizer.to_dictionary(@memory)
     end
 
     def think

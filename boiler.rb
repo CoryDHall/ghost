@@ -5,8 +5,8 @@ end
 
 def create_players
   @human_player = Player.new "You"
-  @prometheus = AiPlayer.new "Prometheus"
-  @moneta = MemorizingAiPlayer.new "Moneta"
+  @prometheus = Ai::BruteForce.new "Prometheus"
+  @moneta = Ai::Memorizer.new "Moneta"
   @chronus = Ai::BetterMemorizer.new "Chronus"
   @chronus.color = :light_white
   @athena = BayesianAiPlayer.new "Athena"

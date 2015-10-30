@@ -58,8 +58,14 @@ class Game
 
   def play_round
     until is_word?
+    begin
       display
       take_turn
+    rescue => e
+      HUMAN.set_streams
+      p e
+      p $@
+    end
       switch_players!
     end
     HUMAN.set_streams
@@ -91,6 +97,7 @@ class Game
     begin
       fragment_error(letter)
       letter = get_letter
+      STDOUT.print letter
     end until valid_play?(letter)
     HUMAN.set_streams
     print ".#{letter}".colorize(current_player.color)

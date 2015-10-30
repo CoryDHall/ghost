@@ -45,4 +45,7 @@ class Player
     $stdin.gets.chomp
   end
 
+  def commit_memory
+  end
+
 end

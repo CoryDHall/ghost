@@ -14,6 +14,36 @@ class Ai::BetterMemorizer < Ai::Memorizer
     end
   end
 
+  def self.to_dictionary(memory_node)
+    dict = {}
+    words = node_to_frags(memory_node)
+    words.each do |word|
+      dict[word] = true
+    end
+    dict
+  end
+
+  def self.node_to_frags(node, frag="")
+    output = []
+    node.each_child do |letter, child|
+      new_frag = frag + letter
+      output.concat([new_frag])
+      output.concat(node_to_frags(child, new_frag))
+    end
+    output
+  end
+
+  def self.dictionary_to_node(dict)
+    node = Node.new ""
+    dict.each_key do |fragment|
+      top_node = node
+      fragment.each_char do |chr|
+        top_node = top_node.find_or_create chr
+      end
+    end
+    node
+  end
+
   def initialize(name = "Computer")
     super(name)
     set_vars
@@ -50,7 +80,7 @@ class Ai::BetterMemorizer < Ai::Memorizer
         item_on = 0
         until ready || item_on >= @current_possibles.length
           new_guess = @current_possibles.last
-          ready = remembers?(new_guess)
+          ready = remembers?(@current_frag + new_guess)
           @current_possibles.pop() if ready
           item_on += 1
         end
@@ -60,27 +90,18 @@ class Ai::BetterMemorizer < Ai::Memorizer
     end
 
     def memorize(word)
-      mem_str = memory_str word
-      @_current_node = @_dictionary.search mem_str
-      unless @_current_node
-        @_current_node = add_to_dictionary mem_str
+      unless remembers? word
+        add_to_dictionary word
+        memorize word.chop
       end
     end
 
-    def memory_str(word)
-      word.split ''
-    end
-
-    def add_to_dictionary(mem_str)
-      top_node = @_dictionary
-      mem_str.each do |char|
-        top_node = top_node.find_or_create char
-      end
-      top_node
+    def add_to_dictionary(word)
+      @_dictionary[word] = true
     end
 
     def remembers?(word)
-      @_current_node.has_child? word
+      !!@_dictionary[word]
     end
 
     def last_lines_chunk

@@ -9,8 +9,8 @@ def create_players
   @moneta = Ai::Memorizer.new "Moneta"
   @chronus = Ai::BetterMemorizer.new "Chronus"
   @chronus.color = :light_white
-  @athena = BayesianAiPlayer.new "Athena"
-  @minerva = BayesianAiPlayer.new "Minerva"
+  @athena = Ai::BayesianSpeedy.new "Athena"
+  @minerva = Ai::BayesianSpeedy.new "Minerva"
   @minerva.color = :white
   nil
 end
@@ -40,7 +40,7 @@ def athena_vs_prometheus
 end
 
 def clear_athena
-   BayesianAiPlayer.clear_dictionary!
+   Ai::BayesianSpeedy.clear_dictionary!
 end
 
 def _make_athena_stat (against = [@moneta, @prometheus])

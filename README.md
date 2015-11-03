@@ -43,7 +43,7 @@ This AI extends the previous, but maintains a dictionary file of fragments that 
 [Read More][faster brute force]
 [faster brute force]: https://en.m.wikipedia.org/wiki/Brute-force_search#Speeding_up_brute-force_searches
 
-####  `BayesianAiPlayer` | Bayesian Inferance AI
+####  `Ai::BayesianSpeedy` | Bayesian Inferance AI
 This AI keeps a record of it's outputs that have resulted in valid word fragments, and the number of times that playing a letter resulted in a loss. It then takes those values and calculates a response that is optimized for speed and winning.
 * This algorithm will develop a disposition to a certain response
 * Due to this, over time, this game outperforms the preceding AI's in both speed and accuracy
@@ -54,7 +54,7 @@ This AI keeps a record of it's outputs that have resulted in valid word fragment
 
 ***
 ##  Todo
-- [ ]  Modify or extend the `BayesianAiPlayer` to prioritize win cases over valid cases
+- [ ]  Modify or extend the `Ai::BayesianSpeedy` to prioritize win cases over valid cases
 - [ ]  Extend existing AI classes to make smarter AIs
 - [ ]  Refactor the Player Interface into an agnostic agent
 - [ ]  Split this project into smaller focused projects

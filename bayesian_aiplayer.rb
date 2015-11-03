@@ -1,10 +1,10 @@
 require_relative 'memorizing_aiplayer.rb'
 
-class BayesianAiPlayer < Ai::Memorizer
+class Ai::BayesianSpeedy < Ai::Memorizer
 
   def dump_memory(file_name = "#{@name}#{Time.now}")
     file_name = file_name.downcase.scan(/\w+/).join("")
-    BayesianAiPlayer.dump_to dict_string_arr, "#{DIR}/#{file_name}.dict.txt"
+    Ai::BayesianSpeedy.dump_to dict_string_arr, "#{DIR}/#{file_name}.dict.txt"
   end
 
   def dict_string_arr
@@ -48,7 +48,7 @@ class BayesianAiPlayer < Ai::Memorizer
     def set_vars
       @color = :light_green
       @memory_file = "#{DIR}/current.dict.txt"
-      @_dictionary = BayesianAiPlayer.parse(@memory_file)
+      @_dictionary = Ai::BayesianSpeedy.parse(@memory_file)
       set_total
       @invalids = {}
       @old_frag = "*"

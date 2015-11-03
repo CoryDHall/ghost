@@ -44,6 +44,11 @@ class Ai::BetterMemorizer < Ai::Memorizer
     node
   end
 
+  def self.clear_dictionary!
+    node = dictionary_to_node({})
+    dump_to node, "#{DIR}/current.dict.yml"
+  end
+
   def initialize(name = "Computer")
     super(name)
     set_vars

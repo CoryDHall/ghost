@@ -10,8 +10,8 @@ def create_players
   @chronus = Ai::BetterMemorizer.new "Chronus"
   @chronus.color = :light_white
   @athena = Ai::BayesianSpeedy.new "Athena"
-  @minerva = Ai::BayesianSpeedy.new "Minerva"
-  @minerva.color = :white
+  @nike = Ai::BayesianWinner.new "Nike"
+  # @nike.color = :white
   nil
 end
 
@@ -41,6 +41,22 @@ end
 
 def clear_athena
    Ai::BayesianSpeedy.clear_dictionary!
+end
+
+def clear_memories
+  mem_players = [@chronus, @athena, @nike]
+  mem_players.each do |player|
+    player.dump_memory
+    player.class.clear_dictionary!
+  end
+  nil
+end
+
+def run_all(slice = nil)
+  players = [@prometheus, @chronus, @athena, @nike].shuffle
+  slice ||= players.length
+  setup_game *players.take(slice)
+  @game.run
 end
 
 def _make_athena_stat (against = [@moneta, @prometheus])

@@ -1,38 +1,8 @@
 require_relative 'memorizing_aiplayer.rb'
 
-class Ai::Bayesian < Ai::Memorizer
+class Ai::BayesianSpeedy < Ai::Bayesian
 
-  def dump_memory(file_name = "#{@name}#{Time.now}")
-    file_name = file_name.downcase.scan(/\w+/).join("")
-    Ai::Bayesian.dump_to dict_string_arr, "#{DIR}/#{file_name}.dict.txt"
-  end
-
-  def dict_string_arr
-    output = []
-    @_dictionary.each do |letter, data|
-      output << "#{letter}\t#{data.values.map(&:to_i).join("\t")}"
-    end
-    output
-  end
-
-  def self.clear_dictionary!
-    dictionary_arr = []
-    ("a".."z").each do |letter|
-      dictionary_arr << "#{letter}\t0\t0"
-    end
-    dump_to dictionary_arr, "#{DIR}/current.dict.txt"
-  end
-
-  def self.parse_line(dict, line)
-    letter, valids, losses = line.scan(/[a-z]|\d+/)
-    dict[letter] ||= Hash.new do |h, k|
-      h[k] = 0
-    end
-    dict[letter][:valids] = valids.to_f
-    dict[letter][:losses] = losses.to_f
-  end
-
-  DIR = "bayesian"
+  DIR = "bayesian_s"
 
   def lose_round
     super
@@ -48,7 +18,7 @@ class Ai::Bayesian < Ai::Memorizer
     def set_vars
       @color = :light_green
       @memory_file = "#{DIR}/current.dict.txt"
-      @_dictionary = Ai::Bayesian.parse(@memory_file)
+      @_dictionary = Ai::BayesianSpeedy.parse(@memory_file)
       set_total
       @invalids = {}
       @old_frag = "*"
